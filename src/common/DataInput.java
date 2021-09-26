@@ -10,6 +10,7 @@ public class DataInput {
 
     private static final Scanner in = new Scanner(System.in);
     private static final String PASS_VALID = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+    private static final String Input_VALID ="^[a-zA-Z0-9]*$";
 
     //check user input number limit
     public static int checkInputIntLimit(String msg, int min, int max) {
@@ -60,6 +61,21 @@ public class DataInput {
             }
         }
     }
+     //check user input string
+    // PHan Đức Mạnh : Sửa lỗi tên chỉ được chứa kí tự chữ hoặc số không được chứa kí tự đặc biệt
+    public static String checkInputName(String smg) {
+        //loop until user input correct
+        while (true) {
+            System.out.println(smg);
+            String result = in.nextLine().trim();
+            if (result.isEmpty() || !result.matches(Input_VALID)) {
+                System.err.println("Not empty");
+                System.out.print("Enter again: ");
+            } else {
+                return result;
+            }
+        }
+    }
 
     //check user input string
     public static String checkInputString(String smg) {
@@ -83,7 +99,13 @@ public class DataInput {
             System.out.println(smg);
             try {
                 int result = Integer.parseInt(in.nextLine().trim());
-                return result;
+                 //Phan Đức Mạnh .Sửa lỗi không dùng số âm khi nhập số lượng của hoa quả
+                if(result<=0){
+                                    System.out.println("Not VaLID");
+                }else {
+                    return result;
+                }   
+          
             } catch (NumberFormatException e) {
                 System.err.println("Must be input integer.");
                 System.out.print("Enter again: ");
@@ -98,7 +120,12 @@ public class DataInput {
             System.out.println(smg);
             try {
                 double result = Double.parseDouble(in.nextLine());
-                return result;
+                //Phan Đức Mạnh.Sửa lỗi không dùng số âm khi nhập giá của hoa quả
+              if(result<=0){
+                    System.out.println("Not VaLID");
+                }else {
+                    return result;
+                }   
             } catch (NumberFormatException e) {
                 System.err.println("Must be input double");
                 System.out.print("Enter again: ");
@@ -127,9 +154,10 @@ public class DataInput {
     }
 
     //check id exist
-    public static boolean fruitExisted(ArrayList<Fruit> lf, String id) {
+    //Phan Đức Mạnh :Đã sửa lại kiểu dữ liệu string id --> int id
+    public static boolean fruitExisted(ArrayList<Fruit> lf, int id) {
         for (Fruit fruit : lf) {
-            if (id.equalsIgnoreCase(fruit.getFruitId())) {
+            if (id==fruit.getFruitId()) {
                 return true;
             }
         }
@@ -146,9 +174,10 @@ public class DataInput {
         return false;
     }
     //check item exist or not
-    public static boolean checkItemExist(ArrayList<Order> lo, String id) {
+        //Phan Đức Mạnh :Đã sửa lại kiểu dữ liệu string id --> int id
+    public static boolean checkItemExist(ArrayList<Order> lo, int id) {
         for (Order order : lo) {
-            if (order.getFruitId().equalsIgnoreCase(id)) {
+            if (order.getFruitId()==id) {
                 return false;
             }
         }

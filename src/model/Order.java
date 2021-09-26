@@ -1,7 +1,7 @@
 package model;
 public class Order {
 
-    private String fruitId;
+    private int fruitId;
     private String fruitName;
     private int quantity;
     private double price;
@@ -9,18 +9,18 @@ public class Order {
     public Order() {
     }
 
-    public Order(String fruitId, String fruitName, int quantity, double price) {
+    public Order(int fruitId, String fruitName, int quantity, double price) {
         this.fruitId = fruitId;
         this.fruitName = fruitName;
         this.quantity = quantity;
         this.price = price;
     }
 
-    public String getFruitId() {
+    public int getFruitId() {
         return fruitId;
     }
 
-    public void setFruitId(String fruitId) {
+    public void setFruitId(int fruitId) {
         this.fruitId = fruitId;
     }
 

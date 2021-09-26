@@ -60,9 +60,9 @@ public class OrderManager {
         return lo;
     }
 
-    public void updateOrder(ArrayList<Order> lo, String id, int quantity) {
+    public void updateOrder(ArrayList<Order> lo, int id, int quantity) {
         for (Order order : lo) {
-            if (order.getFruitId().equalsIgnoreCase(id)) {
+            if (order.getFruitId()==(id)) {
                 order.setQuantity(order.getQuantity() + quantity);
                 return;
             }
