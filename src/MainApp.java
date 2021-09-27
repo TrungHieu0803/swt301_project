@@ -38,18 +38,27 @@ public class MainApp {
         FruitView fv = new FruitView();
         OrderManager om = new OrderManager();
         OrderView ov = new OrderView();
-        fv.displayListFruit(fm.getFruitList());
+        
+        //if (fm.getFruitList() = null && fm.getFruitList().isEmpty()){
+        //System.out.println("There is no fruit");
+        
+       // }
+       // else{
+           fv.displayListFruit(fm.getFruitList());
+        //}
         System.out.print("Enter item: ");
         int item = DataInput.checkInputIntLimit(1, fm.getFruitList().size());
         System.out.print("Enter quantity: ");
         int quantity = DataInput.checkInputIntLimit(1, fm.getFruitByItem(item).getQuantity());
+       
         om.shopping(fm.getFruitList(), fm.getFruitByItem(item), quantity);
         ov.displayListOrder(om.getListOrder());
         String name = DataInput.checkInputString("Enter name: ");
+        // fix
         om.putToHT(name);
+
         System.out.println("Add successfull");
     }
-
     private static void handleAdminMenu(User user) {
         while (true) {
             System.out.println("FRUIT SHOP SYSTEM");
