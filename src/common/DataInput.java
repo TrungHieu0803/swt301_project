@@ -10,7 +10,9 @@ public class DataInput {
 
     private static final Scanner in = new Scanner(System.in);
     private static final String PASS_VALID = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+    private static final String NUM_VALID = "[0,9].[0]";
     private static final String Input_VALID ="^[a-zA-Z0-9]*$";
+
 
     //check user input number limit
     public static int checkInputIntLimit(String msg, int min, int max) {
@@ -97,8 +99,12 @@ public class DataInput {
         //loop until user input correct
         while (true) {
             System.out.println(smg);
+            int result;
             try {
-                int result = Integer.parseInt(in.nextLine().trim());
+
+                result = Integer.parseInt(in.nextLine().trim());
+               
+
                  //Phan Đức Mạnh .Sửa lỗi không dùng số âm khi nhập số lượng của hoa quả
                 if(result<=0){
                                     System.out.println("Not VaLID");
@@ -108,7 +114,7 @@ public class DataInput {
           
             } catch (NumberFormatException e) {
                 System.err.println("Must be input integer.");
-                System.out.print("Enter again: ");
+                System.out.print("Enter again");
             }
         }
     }
@@ -164,7 +170,7 @@ public class DataInput {
         return false;
     }
 
-        //check id exist
+    //check id exist
     public static boolean userExisted(ArrayList<User> userList, int userCode) {
         for (User user : userList) {
             if (userCode == user.getUserId()) {
@@ -173,6 +179,7 @@ public class DataInput {
         }
         return false;
     }
+
     //check item exist or not
         //Phan Đức Mạnh :Đã sửa lại kiểu dữ liệu string id --> int id
     public static boolean checkItemExist(ArrayList<Order> lo, int id) {
@@ -182,5 +189,9 @@ public class DataInput {
             }
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        checkInputInt("nhap: ");
     }
 }
