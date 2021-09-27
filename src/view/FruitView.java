@@ -40,16 +40,16 @@ public class FruitView {
 
     public void displayListFruit(ArrayList<Fruit> fruitList) {
         int countItem = 1;
-        if (fruitList.isEmpty()) {
-            System.out.println("Shop is empty please return next time");
-        } else {
-            System.out.printf("%-10s%-20s%-20s%10s\n", "Item", "Fruit name", "Origin", "Price");
-            for (Fruit fruit : fruitList) {
-                //check shop have item or not 
-                if (fruit.getQuantity() != 0) {
-                    System.out.printf("%-10d%-20s%-20s%10.0f$\n", countItem++,
-                            fruit.getFruitName(), fruit.getOrigin(), fruit.getPrice());
-                }
+        // item = id
+        System.out.printf("%-10s%-20s%-20s%10s\n", "Item", "Fruit name", "Origin", "Price");
+        //System.out.printf("%-10s%-20s%-20s%-10d%10s\n", "Item", "Fruit name", "Origin", "Quantity, "Price");
+        for (Fruit fruit : fruitList) {
+            //check shop have item or not 
+            if (fruit.getQuantity() != 0) {
+                System.out.printf("%-10d%-20s%-20s%10.0f$\n", countItem++,
+                        fruit.getFruitName(), fruit.getOrigin(), fruit.getPrice());
+                 //System.out.printf("%-10d%-20s%-20s%10.0f$\n", countItem++,
+//                        fruit.getFruitName(), fruit.getOrigin(), fruit.getPrice(), fruit.getQuantity());
             }
         }
     }
