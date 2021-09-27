@@ -87,10 +87,14 @@ public class UserView {
 
     public void displayUserList(ArrayList<User> userList) {
         int countItem = 1;
-        System.out.printf("%-12s%-20s%-20s%12s\n", "++ Code ++", "++ User Name ++", "++ Password ++", "++ Role ++");
-        for (User user : userList) {
-            System.out.printf("%-10d%-20s%-20s%10.0f$\n", user.getUserId(), user.getUserName(),
-                    user.getPassword(), user.getType());
+        if (userList.isEmpty()) {
+            System.out.println("list is empty");
+        } else {
+            System.out.printf("%-12s%-20s%-20s%12s\n", "++ Code ++", "++ User Name ++", "++ Password ++", "++ Role ++");
+            for (User user : userList) {
+                System.out.printf("%-10d%-20s%-20s%10.0f$\n", user.getUserId(), user.getUserName(),
+                        user.getPassword(), user.getType());
+            }
         }
     }
 }

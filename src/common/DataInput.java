@@ -10,6 +10,7 @@ public class DataInput {
 
     private static final Scanner in = new Scanner(System.in);
     private static final String PASS_VALID = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+    private static final String NUM_VALID = "[0,9].[0]";
 
     //check user input number limit
     public static int checkInputIntLimit(String msg, int min, int max) {
@@ -81,12 +82,13 @@ public class DataInput {
         //loop until user input correct
         while (true) {
             System.out.println(smg);
+            int result;
             try {
-                int result = Integer.parseInt(in.nextLine().trim());
+                result = Integer.parseInt(in.nextLine().trim());
                 return result;
             } catch (NumberFormatException e) {
                 System.err.println("Must be input integer.");
-                System.out.print("Enter again: ");
+                System.out.print("Enter again");
             }
         }
     }
@@ -136,7 +138,7 @@ public class DataInput {
         return false;
     }
 
-        //check id exist
+    //check id exist
     public static boolean userExisted(ArrayList<User> userList, int userCode) {
         for (User user : userList) {
             if (userCode == user.getUserId()) {
@@ -145,6 +147,7 @@ public class DataInput {
         }
         return false;
     }
+
     //check item exist or not
     public static boolean checkItemExist(ArrayList<Order> lo, String id) {
         for (Order order : lo) {
@@ -153,5 +156,9 @@ public class DataInput {
             }
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        checkInputInt("nhap: ");
     }
 }

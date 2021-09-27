@@ -1,4 +1,4 @@
-package model;
+    package model;
 public class Order {
 
     private String fruitId;
