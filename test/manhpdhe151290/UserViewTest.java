@@ -10,8 +10,7 @@ import static org.junit.Assert.*;
 import view.UserView;
 
 /**
- *
- * @author DO THANH TRUNG
+
  */
 public class UserViewTest {
     UserView uv;

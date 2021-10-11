@@ -11,10 +11,7 @@ import model.Fruit;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author DO THANH TRUNG
- */
+
 public class FruitManagerTest {
     FruitManager fm;
     
