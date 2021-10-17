@@ -3,40 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package manhpdhe151290;
+package controller;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import view.UserView;
 
 /**
-
+ *
+ * @author This PC
  */
-public class UserViewTest {
-    UserView uv;
+public class OrderManagerTest {
     
-    public UserViewTest() {
-        uv = new UserView();
+    public OrderManagerTest() {
     }
 
     @Test
-    public void testManageUsers() {
+    public void testShopping() {
     }
 
     @Test
-    public void testLogin() {
+    public void testPutToHT() {
     }
 
     @Test
-    public void testGetUserInfo() {
+    public void testGetHT() {
     }
 
     @Test
-    public void testChangePassword() {
+    public void testGetListOrder() {
     }
 
     @Test
-    public void testDisplayUserList() {
+    public void testUpdateOrder() {
     }
     
 }
