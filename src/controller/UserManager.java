@@ -8,10 +8,12 @@ package controller;
 import common.AppConstant;
 import common.DataInput;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +26,10 @@ import model.User;
  * @author kiennt
  */
 public class UserManager {
+
     private final ArrayList<User> userList = new ArrayList<>();
-    
-     public static List<String> getListAccounts() {
+
+    public static List<String> getListAccounts() {
         List<String> listUsers = null;
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
                 new FileInputStream(AppConstant.USER_DATA), StandardCharsets.UTF_8));) {
@@ -57,6 +60,24 @@ public class UserManager {
 
         return false;
     }
+    //ham sua lai truyen file vao k dung Viet sua
+    public static boolean checkLogin2(User user) {
+        File f = new File(AppConstant.USER_DATA);
+        try (BufferedReader reader = new BufferedReader(new FileReader(f))) {
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                String[] userInfo = line.split("\\|");
+                if (user.getUserName().equals(userInfo[1].trim()) && user.getPassword().equals((userInfo[2].trim()))) {
+                    user.setType(Integer.parseInt(userInfo[3].trim()));
+                    user.setUserId(Integer.parseInt(userInfo[0].trim()));
+                    return true;
+                }
+            }
+        } catch (IOException ex) {
+        }
+
+        return false;
+    }
 
     public static void changePassword(User user, String newPassword) {
         List<String> listUsers = getListAccounts();
@@ -68,7 +89,7 @@ public class UserManager {
                     user.setPassword(newPassword);
                 }
             }
-            saveAccount(listUsers);            
+            saveAccount(listUsers);
         }
     }
 
@@ -81,11 +102,11 @@ public class UserManager {
         } catch (IOException ex) {
         }
     }
-    
+
     public ArrayList<User> getUserList() {
         return userList;
     }
-    
+
     public void addUser() {
         //loop until user don't want to create fruit
         while (true) {
@@ -94,12 +115,12 @@ public class UserManager {
                 System.err.println("User code existed!");
                 return;
             }
-            
+
             String userName = DataInput.checkInputString("Enter user name: ");
             String password = DataInput.checkInputString("Enter password: ");
             int userType = DataInput.checkInputInt("Enter user type: ");
             userList.add(new User(userCode, userName, password, userType));
-            
+
             //check user want to continue or not
             if (!DataInput.checkInputYN()) {
                 return;
@@ -115,7 +136,7 @@ public class UserManager {
                 System.err.println("User code does not exist!");
                 return;
             }
-            
+
             String userName = DataInput.checkInputString("Enter user name: ");
             String password = DataInput.checkInputString("Enter password: ");
             int userType = DataInput.checkInputInt("Enter user type: ");
@@ -132,12 +153,55 @@ public class UserManager {
             }
         }
     }
+
     public static void main(String[] args) {
         UserManager um = new UserManager();
-       
+
         List<String> list = getListAccounts();
         for (String s : list) {
             System.out.println(s);
         }
+    }
+
+    public static String addUserToFile(User user) {
+        String result = "";
+        try {
+            File file = new File(AppConstant.USER_DATA);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+
+            FileWriter fw = new FileWriter(file, true);
+            String changeType = DataInput.checkType(user.getType());
+            if (!((user.getType() == 1) || (user.getType() == 2))) {
+                result += "invalidtype";
+                return result;
+            }
+
+            String userName = user.getUserName();
+            while ((line = reader.readLine()) != null) {
+                String[] userInfo = line.split("\\|");
+                if (user.getUserName().equals(userInfo[1].trim())) {
+                    result += "username exist";
+                    return result;
+                }
+            }
+            String passWord = user.getPassword();
+            String PASS_VALID = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+            if (!passWord.matches(PASS_VALID)) {
+                result += "password invalid";
+                return result;
+            }
+
+            //BufferedWriter writer give better performance
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(5 + "|" + userName + "|" + passWord + "|" + changeType + "|");
+            //Closing BufferedWriter Stream
+            bw.close();
+            result += "success";
+        } catch (Exception e) {
+            System.out.println("Lỗi ở addUser ghi file");
+            System.out.println(e);
+        }
+        return result;
     }
 }
