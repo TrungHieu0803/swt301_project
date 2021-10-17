@@ -132,4 +132,12 @@ public class UserManager {
             }
         }
     }
+    public static void main(String[] args) {
+        UserManager um = new UserManager();
+       
+        List<String> list = getListAccounts();
+        for (String s : list) {
+            System.out.println(s);
+        }
+    }
 }
