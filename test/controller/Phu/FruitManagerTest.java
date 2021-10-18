@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.Phu;
 
+import controller.FruitManager;
 import java.util.ArrayList;
 import model.Fruit;
 import org.junit.Test;

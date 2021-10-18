@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.Phu;
 
 
 import com.sun.prism.impl.PrismSettings;
@@ -13,6 +13,7 @@ import model.User;
 import org.junit.AfterClass;
 
 import common.AppConstant;
+import controller.UserManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -20,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -164,7 +166,7 @@ public class UserManagerTest {
 //    }
 
 
-    
+    //Phu
 
    
     public void testCheckLogin() {
@@ -256,12 +258,19 @@ public class UserManagerTest {
      * Test of deleteUser method, of class UserManager.
      */
     @Test
-    public void testDeleteUser() {
-        System.out.println("deleteUser");
-        UserManager instance = new UserManager();
-        instance.deleteUser();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+   public void testDeleteUser() throws Exception {
+        ArrayList<User> userListExpected = new ArrayList<>();
+        try {
+            if (userListExpected.isEmpty()) {
+                for (int i = 0; i < userListExpected.size(); i++) {
+                    userListExpected.remove(i);
+                }
+            }
+            fail("Not throw exception");
+        } catch (Exception e) {
+            assertThat(e, instanceOf(IllegalStateException.class));
+            assertEquals(e.getMessage(), "list empty");
+        }
     }
 
     @Test
